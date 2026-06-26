@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumExpress | Next-Gen Courier Management</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #8b5cf6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #10b981 100%);
+            --gradient-reverse: linear-gradient(135deg, #10b981 0%, #8b5cf6 50%, #6366f1 100%);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1.2rem 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 0.8rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+.nav-link,
+.nav-link.dropdown-toggle {
+    font-weight: 600;
+    color: var(--dark) !important;
+    margin: 0 0.5rem;
+    position: relative;
+    padding: 0.5rem 0 !important;
+}
+
+/* Underline */
+.nav-link::before,
+.nav-link.dropdown-toggle::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 10px;
+    transition: width .3s ease;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before,
+.nav-link.dropdown-toggle:hover::before,
+.nav-item.show .dropdown-toggle::before {
+    width: 100%;
+}
+
+/* Dropdown arrow color */
+.dropdown-toggle::after {
+    border-top-color: var(--dark);
+    margin-left: .4rem;
+    vertical-align: middle;
+}
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-register {
+            background: var(--gradient);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+            background-color: #ffffff;
+
+        }
+
+        .hero-bg {
+            position: absolute;
+            bottom: 0;
+            /* place at bottom */
+            left: 50%;
+            width: 20%;
+            /* adjust size */
+            height: 400px;
+            /* adjust height */
+            background-image: url('video/29.jpg');
+            /* your image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            /* align image to bottom */
+            transform: translateX(-50%) scale(0);
+            /* start small */
+            opacity: 0;
+            animation: bgPop 1.5s ease-out forwards;
+            /* animation */
+            z-index: 0;
+        }
+
+        @keyframes bgPop {
+            0% {
+                transform: translateX(-50%) scale(0) translateY(50px);
+                opacity: 0;
+            }
+
+            60% {
+                transform: translateX(-50%) scale(1.2) translateY(-10px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(-50%) scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+
+
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            /* above video */
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 500px;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 20px;
+            background: white;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .floating-element:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .package-tracker {
+            top: 50px;
+            left: 0;
+            width: 200px;
+            height: 120px;
+            padding: 20px;
+        }
+
+        .delivery-map {
+            top: 200px;
+            right: 50px;
+            width: 250px;
+            height: 180px;
+            padding: 25px;
+        }
+
+        .analytics-dash {
+            bottom: 80px;
+            left: 100px;
+            width: 220px;
+            height: 150px;
+            padding: 20px;
+        }
+
+        .floating-element i {
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+        }
+
+        .feature-icon i {
+            font-size: 2.2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 120px 0;
+            background: #f8fafc;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.15);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 2rem 0;
+            color: var(--dark);
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2.5rem;
+        }
+
+        .pricing-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .contact-info {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: var(--gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 4rem;
+            color: white;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-card h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-card p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-cta {
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 3rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links h5 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 10px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links ul li a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 60px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-image {
+                height: 400px;
+                margin-top: 3rem;
+            }
+
+            .floating-element {
+                position: relative;
+                margin: 1rem auto;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .features,
+            .pricing,
+            .contact,
+            .cta-section {
+                padding: 80px 0;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .cta-card {
+                padding: 3rem 1.5rem;
+            }
+
+            .cta-card h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        .typing-text {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            max-width: 600px;
+            /* adjust container width */
+            text-align: left;
+            white-space: pre-wrap;
+            /* allow wrapping and preserve spaces */
+            overflow: hidden;
+            border-right: 3px solid #ffffff;
+            /* cursor */
+        }
+
+
+        /* Typing animation */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+
+            /* grow to full container width */
+        }
+
+        /* Cursor blink */
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-bolt"></i> QuantumExpress
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" id="dashboardDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dashboard
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dashboardDropdown">
+                            <li><a class="dropdown-item" href="Admin/index.html">Admin Dashboard</a></li>
+                            <li><a class="dropdown-item" href="Agent/index2.html">Agent Dashboard</a></li>
+                            <li><a class="dropdown-item" href="Customer/index3.html">Customer System</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-login">Login</a>
+                    <a href="register.html" class="btn btn-register">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="typing-text" id="typing">Quantum Leap in Courier Management</h1>
+                        <p>Experience the future of logistics with AI-powered delivery optimization, real-time quantum
+                            tracking, and seamless integration across all your delivery channels.</p>
+                        <div class="mt-4">
+                            <a href="register.html" class="btn btn-register btn-lg me-3 px-4 py-3">
+                                <i class="fas fa-rocket me-2"></i> Start Free Trial
+                            </a>
+                            <a href="#features" class="btn btn-login btn-lg px-4 py-3">
+                                <i class="fas fa-play-circle me-2"></i> Watch Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <div class="floating-element package-tracker">
+                            <div class="text-center">
+                                <i class="fas fa-shipping-fast"></i>
+                                <p class="mt-2 fw-bold">Live Tracking</p>
+                            </div>
+                        </div>
+                        <div class="floating-element delivery-map">
+                            <div class="text-center">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p class="mt-2 fw-bold">Route Optimization</p>
+                            </div>
+                        </div>
+                        <div class="floating-element analytics-dash">
+                            <div class="text-center">
+                                <i class="fas fa-chart-line"></i>
+                                <p class="mt-2 fw-bold">Smart Analytics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Revolutionary Features</h2>
+                <p>Powered by cutting-edge technology to transform your courier operations</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>AI-Powered Routing</h4>
+                        <p>Our machine learning algorithms analyze traffic, weather, and historical data to create
+                            optimal delivery routes in real-time.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-satellite"></i>
+                        </div>
+                        <h4>Quantum Tracking</h4>
+                        <p>Track packages with millimeter precision using our proprietary quantum GPS technology. Never
+                            lose sight of a delivery again.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>Automated Dispatch</h4>
+                        <p>Intelligent automation matches deliveries with the perfect courier based on location,
+                            capacity, and performance metrics.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Blockchain Security</h4>
+                        <p>Every delivery is recorded on an immutable blockchain ledger, ensuring complete transparency
+                            and security.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Real-time Analytics</h4>
+                        <p>Dashboard with live metrics, predictive insights, and customizable reports to drive
+                            data-driven decisions.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <h4>Omni-channel Integration</h4>
+                        <p>Seamlessly connect with e-commerce platforms, ERP systems, and third-party logistics
+                            providers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the perfect plan for your business. All plans include a 30-day free trial.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <div class="text-center">
+                            <h4>Starter</h4>
+                            <p>Perfect for small businesses</p>
+                            <div class="pricing-price">$49<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Up to 500 deliveries/month</li>
+                            <li><i class="fas fa-check"></i> Basic tracking system</li>
+                            <li><i class="fas fa-check"></i> 5 user accounts</li>
+                            <li><i class="fas fa-check"></i> Email support</li>
+                            <li><i class="fas fa-check"></i> Basic analytics</li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="register.html" class="btn btn-outline-primary btn-lg">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-card popular">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="text-center">
+                            <h4>Professional</h4>
+                            <p>Ideal for growing businesses</p>
+                            <div class="pricing-price">$99<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Up to 2000 deliveries/month</li>
+                            <li><i class="fas fa-check"></i> Advanced tracking system</li>
+                            <li><i class="fas fa-check"></i> 20 user accounts</li>
+                            <li><i class="fas fa-check"></i> Priority support</li>
+                            <li><i class="fas fa-check"></i> Advanced analytics</li>
+                            <li><i class="fas fa-check"></i> API access</li>
+                            <li><i class="fas fa-check"></i> Custom branding</li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="register.html" class="btn btn-register btn-lg">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <div class="text-center">
+                            <h4>Enterprise</h4>
+                            <p>For large organizations</p>
+                            <div class="pricing-price">$299<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Unlimited deliveries</li>
+                            <li><i class="fas fa-check"></i> Quantum tracking system</li>
+                            <li><i class="fas fa-check"></i> Unlimited user accounts</li>
+                            <li><i class="fas fa-check"></i> 24/7 phone support</li>
+                            <li><i class="fas fa-check"></i> Predictive analytics</li>
+                            <li><i class="fas fa-check"></i> Full API access</li>
+                            <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                            <li><i class="fas fa-check"></i> Custom integrations</li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="register.html" class="btn btn-outline-primary btn-lg">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have questions? Our team is here to help you transform your courier operations.</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="contact-card">
+                        <h3 class="mb-4">Contact Information</h3>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h5>Address</h5>
+                                    <p>123 Quantum Plaza, Tech Valley, CA 94000</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h5>Phone</h5>
+                                    <p>+1 (888) 888-8888</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h5>Email</h5>
+                                    <p>contact@quantumexpress.ai</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h5>Business Hours</h5>
+                                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h5>Follow Us</h5>
+                            <div class="social-icons mt-3">
+                                <a href="#" class="text-primary me-3 fs-4"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-primary me-3 fs-4"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="text-primary me-3 fs-4"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="text-primary fs-4"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-card">
+                        <h3 class="mb-4">Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="contactName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="contactName" placeholder="John Doe"
+                                        required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="contactEmail" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="contactEmail"
+                                        placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactSubject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="contactSubject"
+                                    placeholder="How can we help you?" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactMessage" class="form-label">Message</label>
+                                <textarea class="form-control" id="contactMessage" rows="5"
+                                    placeholder="Tell us about your courier management needs..." required></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-register btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i> Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cta-card">
+                        <h2>Ready for the Quantum Leap?</h2>
+                        <p>Join the thousands of forward-thinking businesses that have transformed their logistics with
+                            QuantumExpress. Start your 30-day free trial today—no credit card required.</p>
+                        <a href="register.html" class="btn btn-cta btn-lg">
+                            <i class="fas fa-bolt me-2"></i> Start Quantum Trial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <a href="#" class="footer-logo"><i class="fas fa-bolt me-2"></i>QuantumExpress</a>
+                    <p class="mt-3" style="color: #94a3b8;">Redefining logistics through quantum computing and
+                        artificial intelligence. The future of delivery is here.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-5">
+                    <div class="footer-links">
+                        <h5>Product</h5>
+                        <ul>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Documentation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-5">
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-5">
+                    <div class="footer-links">
+                        <h5>Contact</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Quantum Plaza, Tech Valley</li>
+                            <li><i class="fas fa-phone me-2"></i> +1 (888) 888-8888</li>
+                            <li><i class="fas fa-envelope me-2"></i> contact@quantumexpress.ai</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 QuantumExpress. All rights reserved. | <a href="#" style="color: #94a3b8;">Privacy
+                        Policy</a> | <a href="#" style="color: #94a3b8;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Landing page animations only
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Floating elements animation
+            const floatingElements = document.querySelectorAll('.floating-element');
+
+            floatingElements.forEach((el, index) => {
+                // Initial position with delay
+                el.style.transform = `translateY(${index * 20}px)`;
+                el.style.opacity = '0';
+                el.style.transition = 'all 0.6s ease';
+
+                // Animate in after delay
+                setTimeout(() => {
+                    el.style.transform = 'translateY(0)';
+                    el.style.opacity = '1';
+                }, 300 + index * 200);
+
+                // Hover effect
+                el.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-15px) scale(1.05)';
+                    this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.15)';
+                    this.style.zIndex = '10';
+                });
+
+                el.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'var(--shadow)';
+                    this.style.zIndex = '1';
+                });
+            });
+
+            // Feature cards animation on scroll
+            const featureCards = document.querySelectorAll('.feature-card');
+
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease 0.2s';
+                cardObserver.observe(card);
+            });
+
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+
+                        // Update active nav link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Gradient animation for CTA section
+            const ctaSection = document.querySelector('.cta-section');
+            let hue = 200;
+
+            function animateGradient() {
+                hue = (hue + 0.3) % 360;
+                ctaSection.style.background = `linear-gradient(135deg, hsl(${hue}, 100%, 65%) 0%, hsl(${(hue + 30) % 360}, 100%, 65%) 50%, hsl(${(hue + 60) % 360}, 100%, 65%) 100%)`;
+                requestAnimationFrame(animateGradient);
+            }
+
+            // Start gradient animation
+            animateGradient();
+
+            // Contact form visual feedback
+            document.getElementById('contactForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Sending...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check me-2"></i> Message Sent!';
+
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        this.reset();
+                    }, 2000);
+                }, 1500);
+            });
+
+            // Remove modal-related CSS and JavaScript
+            // Clean up any modal-related code that might still be in the JavaScript
+        });
+    </script>
+    <script>
+        const text = "Quantum Leap in Courier Management";
+        const element = document.getElementById("typing");
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, 100); // speed in milliseconds
+            } else {
+                // cursor blink after typing
+                element.style.borderRight = "3px solid #ffffff";
+            }
+        }
+
+        element.textContent = ""; // clear text
+        type();
+    </script>
+</body>
+
+</html>
